@@ -1,0 +1,498 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0051)http://localhost:8080/MDITIP/printOutContent.action -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>打印</title>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">
+
+	<style>
+		h4 {
+			font-size: 23px;
+			font-weight: 400;
+			width: 50%;
+			text-align: center;
+			margin: 0 auto;
+		}
+
+		em {
+			font-style: normal
+		}
+
+		b {
+			margin-left: 20px;
+		}
+
+		input {
+			border: 0;
+			outline: none;
+			cursor: pointer;
+		}
+
+		span {
+			width: 30%;
+			float: right;
+		}
+
+		table {
+			width: 100%;
+			border: 1px solid #222;
+		border-top: none;
+		border-bottom: none;
+		}
+		td {
+			width: 15%;
+			height: 44px;
+			border: 1px solid #222;
+			text-align: center;
+		}
+
+		#headerInfo td {
+			width: 15%;
+			height: 44px;
+			border: 1px solid #222;
+			text-align: center;
+			/* word-wrap: break-word;
+			word-break: normal; */
+			page-break-after: always;
+		}
+
+		@media print {
+			.pageBreak {
+				page-break-after: always;
+			}
+
+			.noPrint {
+				display: none;
+			}
+		}
+	</style>
+
+</head>
+
+<body>
+	<div id="print-content">
+		<div class="header">
+			<h4>长阳土家族自治县职业教育中心学生学籍卡</h4>
+		</div>
+		<p>
+			<b><em>经办人：</em><input type="text"></b>
+			<span>打印日期：</span>
+		</p>
+		<!-- 页面记录信息 -->
+		<table cellpadding="0" cellspacing="0">
+			<tr>
+				<td>姓名</td>
+				<td></td>
+				<td>性别</td>
+				<td></td>
+				<td>出生日期</td>
+				<td></td>
+				<td rowspan="3">照片</td>
+			</tr>
+			<tr>
+				<td>民族</td>
+				<td></td>
+				<td>政治面貌</td>
+				<td></td>
+				<td>班级</td>
+				<td></td>
+
+			</tr>
+			<tr>
+				<td>学号</td>
+				<td></td>
+				<td>学制</td>
+				<td></td>
+				<td>学籍号</td>
+				<td></td>
+
+			</tr>
+			<tr>
+				<td>年级</td>
+				<td></td>
+				<td>专业</td>
+				<td></td>
+				<td>身份证号</td>
+				<td colspan="2"></td>
+
+			</tr>
+			<tr>
+				<td>入学年月</td>
+				<td></td>
+				<td>入学方式</td>
+				<td></td>
+				<td>学习形式</td>
+				<td colspan="2"></td>
+			</tr>
+			<tr>
+				<td>家庭住址</td>
+				<td colspan="3"></td>
+				<td>毕业时间</td>
+				<td colspan="2"></td>
+			</tr>
+			<tr>
+				<td>异动情况</td>
+				<td colspan="7"></td>
+			</tr>
+			<tr>
+				<td colspan="8">学业成绩</td>
+			</tr>
+			<tr>
+				<td>学期</td>
+				<td>课程名称</td>
+				<td>成绩</td>
+				<td>课程名称</td>
+				<td>成绩</td>
+				<td>课程名称</td>
+				<td>成绩</td>
+			</tr>
+		</table>
+	
+		<table  cellpadding="0" cellspacing="0" id="yi">	
+			<tr>
+				<td rowspan="5">第一学期</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
+		<table cellpadding="0" cellspacing="0" id="er">
+			<tr>
+				<td rowspan="5">第二学期</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
+		<table  cellpadding="0" cellspacing="0" id="san">
+			<tr>
+				<td rowspan="5">第三学期</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
+		<table  cellpadding="0" cellspacing="0" id="si">
+
+			<tr>
+				<td rowspan="5">第四学期</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
+		<table  cellpadding="0" cellspacing="0" id="wu">
+			<tr>
+				<td rowspan="5">第五学期</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
+		<table  cellpadding="0" cellspacing="0" id="liu">
+			<tr>
+				<td rowspan="5">第六学期</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+
+
+		</table>
+	</div>
+
+</body>
+
+</html>
+<script>
+	var clientH22 = document.body.clientHeight
+	var clientH33 =  window.screen.availHeight
+	var scrollH =  document.body.scrollHeight
+    var yiDom = document.getElementById("yi")
+	var yiH = yiDom.offsetHeight
+	
+	var erDom =  document.getElementById("er")
+	var erH = erDom.offsetHeight
+	var sanDom =  document.getElementById("san")
+	var sanH = sanDom.offsetHeight
+	var siDom =  document.getElementById("si")
+	var siH = siDom.offsetHeight
+	var wuDom =  document.getElementById("wu")
+	var wuH = wuDom.offsetHeight
+	var liuDom =  document.getElementById("liu")
+	var liuH = liuDom.offsetHeight
+	var siNumH = erH + sanH + siH
+	erDom.classList.add("pageBreak")
+	if(yiH>230){
+		yiDom.classList.add("pageBreak")
+		wuDom.classList.add("pageBreak")
+	}
+	
+	if(erH > 230){
+		yiDom.classList.add("pageBreak")
+		erDom.classList.remove("pageBreak")
+	}
+	
+    if(sanH > 300){
+		  erDom.classList.remove("pageBreak")
+		  sanDom.classList.add("pageBreak")
+          siDom.classList.remove("pageBreak")
+		  wuDom.classList.remove("pageBreak")
+	}
+	if(siH > 400){
+		  siDom.classList.add("pageBreak")
+          liuDom.classList.remove("pageBreak")
+		  wuDom.classList.remove("pageBreak")
+     }
+	 if(wuH > 400){
+		  wuDom.classList.add("pageBreak")
+          liuDom.classList.remove("pageBreak")
+		 
+     }
+	 if(liuH > 400){
+		wuDom.classList.add("pageBreak")
+		 
+     }
+
+	 if((erH + sanH)>600){
+		sanDom.classList.add("pageBreak")
+		siDom.classList.remove("pageBreak")
+		wuDom.classList.remove("pageBreak")
+        liuDom.classList.remove("pageBreak")
+	 }else
+	 if((sanH +siH)>700){
+		// siDom.classList.add("pageBreak")
+		wuDom.classList.remove("pageBreak")
+        liuDom.classList.remove("pageBreak")
+	 }
+	
+	 if((siH + wuH) >700){
+		wuDom.classList.add("pageBreak")
+        liuDom.classList.remove("pageBreak")
+	 }
+	  console.log("erH",erH)
+	 console.log("sanH",sanH)
+	 console.log("siH",siH)
+	 console.log("wuH",wuH)
+	 console.log("liuH",liuH)
+
+	 if((erH + sanH + siH)>700){
+		sanDom.classList.add("pageBreak")
+		siDom.classList.remove("pageBreak")
+		wuDom.classList.add("pageBreak")
+	 }
+
+</script>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>标签页1</title>
+</head>
+<body>
+  <h1>标签页1</h1>
+  <!-- <a href="./2.html" target="_blank">打开2页面</a> -->
+  <input type="text" id="ipt">
+  <button id="btn" onclick="send()">发送</button>
+</body>
+<script src="./crossTagMsg.js"></script>
+<script>
+  let iptRef = document.getElementById('ipt')
+  let btnRef = document.getElementById('btn')
+  console.log(iptRef, btnRef)
+  function send() {
+    console.log(iptRef.value, 123)
+    // window.open('./2.html', '_blank')
+    sendMsg('send-msg', iptRef.value)
+  }
+</script>
+</html>
