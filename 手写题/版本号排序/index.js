@@ -18,8 +18,15 @@ const compareVer = (versions) => {
 console.log(compareVer(['0.1.1', '2.3.3', '0.302.1', '4.2', '4.3.5', '4.3.4.5']))
 
 
-const a = [1,4,3,2,4,6,4,7,8,4]
+const a = [33,32,31,'abc','cde',5,6,33,'aa','bb',1,2,3];
+// const a = [33,32,31,'abc','cde',5,6,31,'aa','bb',1,2,3];
+// console.log(a.sort((a, b) => {
+//   if (typeof a === 'number' && typeof b === 'number') {
+//     return a - b;
+//   } else {
+//     return String(a).localeCompare(String(b));
+//   }
+// }))
 console.log(a.sort((a, b) => {
   return a - b
 }))
-5
