@@ -43,3 +43,10 @@ function uniqueNumber(nums) {
 }
 
 console.log(uniqueNumber([1, 2, 3, 4, 5, 3, 2, 4, 1]))
+
+// << 1 相当于x2 上取整
+// << 3相当于x8
+// >> 1 相当于/2 下取整
+// >> 1 位运算相当于/2 下取整  考虑left + right 的边界溢出情况
+// (left+right)>>1是用二进制移位运算实现整除（以）2运算，比(left+right)/2运算效率高。
+
