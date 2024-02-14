@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html, head, body {
+      /* overflow: hidden; */
+      font-size: 20px;
+    }
+    .line {
+      height: 1px;
+      background-color: black;
+      margin: 10px;
+    }
+    .thin-line {
+      height: 1px;
+      background-color: black;
+      transform: scaleY(.5);
+      transform-origin: 0 0;
+    }
+    .element1 {
+      box-sizing: border-box;
+      width: 100px;
+      height: 100px;
+      padding: 10px;
+      border: 1px solid black;
+    }
+    .element2 {
+      box-sizing: content-box;
+      width: 100px;
+      height: 100px;
+      padding: 10px;
+      border: 1px solid black;
+    }
+
+    #el {
+      width: auto;
+      height: auto;
+      text-align: center;
+    }
+    @keyframes myAnimation {
+      0% {
+        transform: scaleY(1);
+      }
+      50% {
+        transform: scale(10) rotate(45deg);
+      }
+      100% {
+        transform: scaleY(1);
+      }
+    }
+    .animated-element {
+      animation: myAnimation 2s ease-in-out .5s infinite;
+    }
+    .transition-element {
+      font-size: 1.5rem;
+      transition: color 1s ease-in-out;
+    }
+    .transition-element::selection {
+      background-color: beige;
+    }
+    .transition-element::first-letter {
+      font-size: 1.5em;
+    }
+    .transition-element:hover {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <input style="display: block;" type="date" name="" id="">
+  <input style="display: block;" type="time" name="" id="">
+  <input style="display: block;" type="color" name="" id=""><br>
+  <div class="line"></div><br>
+  <div class="line thin-line"></div>
+
+  <div class="element1">1</div>
+  <div class="element2">2</div>
+
+  <div id="el" class="transition-element">Animated Element</div>
+  <script>
+
+    // const element = document.getElementById('el')
+    // element.classList.add('animated-element')
+
+    console.time('a')
+    for(let i = 0; i < 1000000; i++) {
+      const obj = {}
+      obj['a'] = i
+    }
+    console.timeEnd('a')
+
+    console.time('b')
+    for(let i = 0; i < 1000000; i++) {
+      const obj = {}
+      obj[`${i}`] = i
+    }
+    console.timeEnd('b')
+  </script>
+</body>
+</html>
