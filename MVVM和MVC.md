@@ -21,3 +21,4 @@ MVC是Model-View-Controller的简写。Model代表数据模型，也可以在Mod
             MVC模式控制器controller负责处理用户输入和更新模型，相当于直接操作影响视图
 3、视图更新：MVC模式中，视图更新是单向的，由控制器负责更新，
             MVVM模式中，视图更新是双向的，由视图模型负责更新，
+ 
