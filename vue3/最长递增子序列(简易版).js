@@ -16,10 +16,12 @@ function LTS(nums) {
       const line = result[i]
       const tail = line[line.length - 1]
       if (n > tail) {
-        result[i + 1] = [...line, n]
+        result[i + 1] = [...line, n] // result[i + 1]可增加可修改
+        // console.log(JSON.stringify(result), 'result')
         break
       } else if (n < tail && i === 0) {
         result[i] = [n]
+        // console.log(JSON.stringify(result), 'result')
       }
     }
   }
@@ -45,3 +47,4 @@ console.log(LTS([4,5,1,2,7,3,6,9]))
   1 2 3 6 9
 */
 console.log(LTS([3, 7, 22, 4, 8, 13, 9, 11, 12]))
+console.log(LTS([3, 2, 8, 9, 5, 6, 7, 11, 15, 4]))
