@@ -1,8 +1,8 @@
 /**
  * instanceof 只能检测对象
- *  instanceof 作类型判断 ===> 实例 instanceof 类
+ * instanceof 作类型判断 ===> 实例 instanceof 类
  * 原理： 实例.__proto__ === 类.prototype
- * 原理描述：在原型链上一层一层查找，找类constructor.prototype 是否存在于实例的原型链上。
+ * 原理描述：在原型链上一层一层查找，找类constructor.prototype 是否存在于实例的原型链上。(对象的原型链上是否能够找到类型的prototype)
  * */
  const object = {} 
  const array = []
