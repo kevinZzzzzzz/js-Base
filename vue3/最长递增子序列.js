@@ -26,7 +26,7 @@
 //   return result
 // }
 function getSequence(arr) {
-  const dp = new Array(arr.length).fill(1);
+  const dp = new Array(arr.length).fill(1); // 统计最长递增数量
   const result = [arr[0]];
 
   for (let i = 1; i < arr.length; i++) {
@@ -38,7 +38,7 @@ function getSequence(arr) {
       // 否则，通过二分查找找到该数字应该在的位置，从而得到 dp
       let l = 0,
         r = result.length - 1,
-        m = Math.floor((l + r) / 2);
+        m = Math.floor((l + r) >> 1); // 中位数 >> 1 相当于 /2
       while (l <= r) {
         if (result[m] < arr[i]) {
           l = m + 1;
