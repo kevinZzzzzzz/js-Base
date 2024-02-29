@@ -22,8 +22,36 @@
         }
       )
     }
-    const processor = processTasks(...tasks)
+    // const processor = processTasks(...tasks)
     
+    class ProcessTasks {
+      constructor (tasks) {
+        this._tasks = tasks
+        this._isRunning = false // 表示是否正在执行任务
+        this.results = new Array(tasks.length).fill(null) // 存储任务执行结果
+        this._runIndex = 0 // 当前执行到哪个任务
+      }
+      start() {
+        return new Promise(async (resolve) => {
+          if (this._isRunning) return false
+          this._isRunning = true
+          while (this._runIndex < this._tasks.length) {
+            console.log(`正在执行${this._runIndex}任务`)
+            const re = await this._tasks[this._runIndex]()
+            this.results[this._runIndex] = re
+            console.log(`${this._runIndex}任务执行结果：`, re)
+            this._runIndex++
+            if (!this._isRunning) return
+          }
+          this._isRunning = false // 执行结束后切换状态
+          resolve(this.results) // 只有当所有任务完成时才能得到所有结果
+        })
+      }
+      pause() {
+        this._isRunning = false
+      }
+    }
+    const processor = new ProcessTasks(tasks)
     begin.onclick = async () => {
       console.log('点击开始')
       const results = await processor.start()

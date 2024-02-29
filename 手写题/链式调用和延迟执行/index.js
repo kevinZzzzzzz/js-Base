@@ -27,7 +27,7 @@ function arrange(name) {
     return this
   }
   function waitFirst(time) {
-    tasks.unshift(() => {
+    tasks.unshift(() => { // 第一个
       return new Promise(resolve => {
         setTimeout(() => {
           console.log(`等待${time}s`)
@@ -35,9 +35,9 @@ function arrange(name) {
         }, time * 1000);
       })
     })
-    
     return this
   }
+  // 执行
   async function execute() {
     for (let i in tasks) {
       await tasks[i]()

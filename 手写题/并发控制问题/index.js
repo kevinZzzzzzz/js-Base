@@ -1,6 +1,7 @@
 /* 
   几秒后执行
 */
+// 睡眠函数
 function timeout(time) {
   return new Promise((resolve) => {
     setTimeout(() => {
