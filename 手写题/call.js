@@ -16,4 +16,4 @@ function myCall(ctx) {
 
   delete context.fn // 删除新增的属性
   return result
-} 
+}

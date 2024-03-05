@@ -12,6 +12,8 @@ MVC是Model-View-Controller的简写。Model代表数据模型，也可以在Mod
   ViewModel：负责应用程序的逻辑控制,介于Model和View之间，处理用户操作与Model的交互, 并为View提供渲染的数据。是一个封装视图状态和行为的抽象层。
             通过双向数据绑定把view的修改同步到model中，和把model的修改同步到view上，这使得View和Model可以独立开发和测试。
             包含一个或多个属性，这些属性与view的ui元素绑定，当model触发一个属性变化时，view会自动更新。
+            数据变化后更新视图
+            视图变化后更新数据
 
 
 两者的区别：
