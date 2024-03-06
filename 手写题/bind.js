@@ -12,7 +12,8 @@ function myBind(ctx) {
   return function Fn() {
     return fn.apply(
       this instanceof Fn ? this : ctx, // 根据调用方式，传入不同绑定值
-      args.concat(...arguments))
+      args.concat(...arguments)
+    )
   }
 }
 

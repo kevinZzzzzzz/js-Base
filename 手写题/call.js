@@ -8,12 +8,20 @@ function myCall(ctx) {
   }
   
   let args = [...arguments].slice(1) // 获取参数值
-  let result = null
 
   let context = ctx || window // 指定上下文对象
   context.fn = this // 将函数作为上下文对象一个属性
-  result = context.fn(...args)
+  let result = context.fn(...args)
 
   delete context.fn // 删除新增的属性
   return result
+}
+
+// 简易版
+Function.prototype.mu_call = function (context, ...args) {
+  if (!context) context = window
+  let fn = Symbol()
+
+  context[fn] = this
+  return context[fn](...args)
 }
