@@ -32,7 +32,7 @@ console.log('result object(instanceof)', array.__proto__, array.__proto__ === Ar
 // 原型链继承将一个类型的实例赋值给另外一个构造函数的原型实现的
 // 弊端:1.原型属性上的引用类型会被所有实例共享，当有多个实例化对象的时候，操作某一个的引用类型，其他实例都会跟着改变 
 // 2.无法对父类进行传参
-// 3.类型的原型上的 constructor 属性被重写 解决在将一个实例赋值给另一个构造函数的原型后，要将构造函数原型的构造器指向构造函数自己
+// 3.类型的原型上的 constructor 属性被重写，解决：在将一个实例赋值给另一个构造函数的原型后，要将构造函数原型的构造器指向构造函数自己
 function Parent() {
     this.name = '哈哈哈哈哈'
 }
@@ -47,7 +47,7 @@ Child.prototype.constructor = Child
 const child1 = new Child()
 const child2 = new Child()
 child1.name = 'heiIx'
-//每一个构造函数都有一个原型对象，原型对象包含一个指向构造函数的指针，而每个实例都包含一个指向构造函数的原型对象的内部指针__proto__
+// 每一个构造函数都有一个原型对象，原型对象包含一个指向构造函数的指针，而每个实例都包含一个指向构造函数的原型对象的内部指针__proto__
 console.log(Child.constructor.prototype === Child.__proto__)
 console.log(child1.__proto__ === Child.prototype)
 console.log(Child.prototype.__proto__ === Parent.prototype)
