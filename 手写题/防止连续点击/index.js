@@ -27,7 +27,7 @@ function throttle(fn, delay) {
   let pre = new Date()
   return function() {
     let self = this
-    let now = new Date()
+    let now = new Date() 
     if (now - pre > delay) {
       pre = new Date()
       fn.apply(self)
