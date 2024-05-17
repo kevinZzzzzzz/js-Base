@@ -5,14 +5,14 @@ git config --global --unset http.proxy
 git config --global --unset https.proxy
 
 2. 如果你使用代理服务器，请确保正确配置代理：
-git config --global http.proxy http://proxyserver:proxyport
-git config --global https.proxy https://proxyserver:proxyport
+git config --global http.proxy http://127.0.0.0:9999
+git config --global https.proxy https://127.0.0.0:9999
 
 3. 测试网络连接
 curl -v https://github.com
 
 4. 刷新 DNS 缓存
 Windows
-ipconfig /flushdns
+  ipconfig /flushdns
 macOS 和 Linux
-sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder
+  sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder
