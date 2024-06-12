@@ -2,7 +2,15 @@ let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 // 乱序操作
 const arr1 = arr.sort(() => Math.random() - 0.5);
 console.log(arr1)
-
+function shuffleArray(arr) {
+  let j
+  for (let i = arr.length - 1; i > 0; i--) {
+    j = Math.floor(Math.random() * i)
+    [arr[i], arr[j]] = [arr[j], arr[i]]
+  }
+  return arr
+}
+console.log(shuffleArray(arr))
 /* 
   排序操作1
   快速排序---二分法
