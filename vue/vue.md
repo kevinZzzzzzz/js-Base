@@ -1,5 +1,5 @@
 ## new vue()发生了什么事情？
-答：Vue 初始化主要就干了几件事情，合并配置，初始化生命周期，初始化事件中心，初始化渲染，初始化 data、props、computed、watcher 等等。  
+答：Vue 初始化主要就干了几件事情，合并配置，初始化生命周期，初始化事件中心，初始化渲染函数render，初始化 data、props、computed、watcher 等等。  
 
 ## computed的原理
 答：computed本身是一个惰性的观察者，当vue初次运行会对computed属性做初始化处理，即对每个计算属性创建一个Watcher对象，并传入一个函数，该函数的本质其实就是computed配置中的getter函数，getter函数运行过程就会收集依赖。

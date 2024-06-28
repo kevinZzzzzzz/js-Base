@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>拖拉拽</title>
+  <style>
+    #box {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="box"></div>
+  <script type="text/javascript">
+    var box = document.getElementById('box');
+    let moving = false
+    let xBuffer = 0
+    let yBuffer = 0
+
+    document.addEventListener('mousedown', (e) => {
+      if (moving && e.target.id !== 'box') return false
+      const {left, top} = box.style
+      const {clientX, clientY} = e
+      moving = true
+      xBuffer = clientX - +(left.substr(0, left.indexOf('px')))
+      yBuffer = clientY - +(left.substr(0, top.indexOf('px')))
+    })
+    document.addEventListener('mousemove', (e) => {
+      if (!moving) return false
+      const {clientX, clientY} = e
+      box.style.left = (clientX - xBuffer) + 'px'
+      box.style.top = (clientY - yBuffer) + 'px'
+    })
+    document.addEventListener('mouseup', () => {
+      if (!moving) return false
+      moving = false
+    })
+  </script>
+</body>
+</html>

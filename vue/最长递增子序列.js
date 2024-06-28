@@ -6,7 +6,7 @@
     如果当前这一项比最后一项小，需要在序列中通过二分查找找到比当前大的这一项，用他来替换掉
     前驱节点追溯，替换掉错误的节点
 */
-// function getSequence(arr) {
+// function getSequence1(arr) {
 //   const len = arr.length;
 //   const result = [0] // 默认以数组的第0个为基准来做序列，存储的是数组索引
 //   let resultLastIndex = 0; // 当前序列的最后一个元素索引
@@ -15,7 +15,7 @@
 //     let arr1 = arr[i];
 //     if (arr1 !== 0) { // 因为在vue newIndexToOldIndexMap 中，0代表需要创建新元素，无需进行位置移动操作
 //       resultLastIndex = result[result.length - 1]
-//       console.log(resultLastIndex)
+//       // console.log(resultLastIndex)
 //       if (arr1 > arr[resultLastIndex]) {
 //         // 比较当前项和最后一项的值，如果大于最后一项，则将当前索引添加到结果集中
 //         result.push(i)
@@ -48,13 +48,14 @@ function getSequence(arr) {
         m = Math.floor((l + r) / 2);
       }
       result[l] = arr[i];
-      dp[i] = l + 1;
+      dp[i] = l + 1
     }
   }
 
   console.log(result, 'result')
   // result 不一定是正确的最长递增序列，中间有些数有可能被替换了
   // 所以需要再走一遍构建 result 的逻辑
+  // 需要 前驱节点追溯，替换掉错误的节点
   let max = Math.max(...dp);
   for (let i = arr.length - 1; max > 0; i--) {
     if (dp[i] === max) {
@@ -66,3 +67,4 @@ function getSequence(arr) {
   return result;
 }
 console.log(getSequence([3, 7, 22, 4, 8, 13, 9, 11, 12]));
+// console.log(getSequence1([3, 7, 22, 4, 8, 13, 9, 11, 12]));
