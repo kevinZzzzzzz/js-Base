@@ -12,7 +12,7 @@ git config --global https.proxy https://127.0.0.1:9999
 curl -v https://github.com
 
 4. 刷新 DNS 缓存
-Windows
+Windowspn
   ipconfig /flushdns
 macOS 和 Linux
   sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder
