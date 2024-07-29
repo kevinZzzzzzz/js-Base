@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas id="canvas" width="120" height="40" onclick="draw()"></canvas>
+  <script>
+    const pool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+
+    // 生成随机颜色
+    function randomColor(min, max) {
+      let r = randomNum(min, max)
+      let g = randomNum(min, max)
+      let b = randomNum(min, max)
+      return `rgb(${r},${g} ,${b}`;
+    }
+
+
+
+    function randomNum(min, max) {
+      return Math.floor(Math.random() * (max - min) + min)
+    }
+
+    function draw() {
+      let canvas = document.getElementById("canvas");
+      let ctx = canvas.getContext("2d");
+      // 填充色 随机
+      ctx.fillStyle = randomColor(70, 230)
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+      // 随机生成字符串
+      let imgCode = 'abcd'
+      for (let i = 0; i < imgCode.length; i++) {
+        // const text = pool[randomNum(0, pool.length)]
+        const text = i
+        // imgCode += text
+        // 随机字体大小
+        const fontSize = randomNum(18, 40)
+        // 随机旋转角度
+        const deg = randomNum(-30, 30)
+        ctx.font = `${fontSize}px Simhei`
+        ctx.textBaseline = 'top'
+        ctx.fillStyle = randomColor(80, 150)
+        ctx.save()  // 将当前状态封存入栈
+        ctx.translate(30 * i + 15, 15)
+        ctx.rotate((deg * Math.PI) / 180)
+        ctx.fillText(text, -10, -15)
+        ctx.restore() //
+
+      }
+
+      // 绘制干扰线
+      const lines = randomNum(5, 10);
+
+      for (let i = 0; i < lines; i++) {
+        ctx.beginPath()
+        ctx.moveTo(randomNum(0, canvas.width), randomNum(0, canvas.height))
+        ctx.lineTo(randomNum(0, canvas.width), randomNum(0, canvas.height))
+        ctx.strokeStyle = randomColor(100, 200)
+        ctx.closePath()
+        ctx.stroke()
+      }
+
+      const point = randomNum(90, 150);
+      // 绘制干扰点
+      for (let i = 0; i < point; i++) {
+        ctx.fillRect(Math.random() * canvas.width, Math.random() * canvas.height, 1, 1);
+      }
+
+      console.log(imgCode);
+
+    }
+
+    draw();
+  </script>
+</body>
+
+</html>
