@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #box {
+      width: 200px;
+      height: 200px;
+      border: 1px solid #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+
+<body>
+  <button id="btn">+</button>
+  <div id="box">
+    <h2 id="count2">1</h2>
+  </div>
+  <h1 id="count">1</h1>
+  <script>
+    function randomColor(min, max) {
+      let r = randomNum(min, max)
+      let g = randomNum(min, max)
+      let b = randomNum(min, max)
+      return `rgb(${r},${g} ,${b})`;
+    }
+    function randomNum(min, max) {
+      return Math.floor(Math.random() * (max - min) + min)
+    }
+    const btn = document.querySelector('#btn')
+    const box = document.querySelector('#box')
+    const count = document.querySelector('#count')
+    const count2 = document.querySelector('#count2')
+    let time = null
+    let rAf = null
+    /**
+     * requestAnimationFrame 解决过度绘制的问题，根据设备的绘制间隔
+     * 会把每一帧中所有的DOM操作集中起来，在一次重绘或者重排中就完成。
+     * 在隐藏或者不可见的元素中，
+     * requestAnimationFrame将不会进行重排或者重绘，而运行在页面没有激活的情况下，
+     * 如requestAnimationFrame运行在后台标签页中，动画将会暂停，有效的节省了CPU的开销。
+     **/
+    btn.addEventListener('click', () => {
+      if (rAf) {
+        cancelAnimationFrame(rAf);
+        // clearInterval(time)
+        // time = null
+        rAf = null
+      } else {
+        rAf = window.requestAnimationFrame(function fn() {
+          console.log('我渲染了1', count.innerHTML)
+          count.innerHTML = 1 + (+count.innerHTML)
+          box.style.backgroundColor = randomColor(0, 255)
+          box.style.width = randomNum(10, 300) + 'px'
+          box.style.height = randomNum(10, 300) + 'px'
+          rAf = window.requestAnimationFrame(fn)
+        })
+        console.log(rAf)
+      }
+      window.requestIdleCallback(() => {
+        console.log('我渲染了3')
+        count.innerHTML = 1 + (+count.innerHTML)
+
+      })
+      console.log('我渲染了2')
+
+      count.addEventListener('click', () => {
+        box.style.display = 'none'
+      })
+    })
+  </script>
+</body>
+
+</html>
