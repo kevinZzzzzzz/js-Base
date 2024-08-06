@@ -8,11 +8,14 @@
   objectFactory(构造函数, 初始化参数);
 */
 function objectFactory(fn, ...args) {
-  if (typeof fn !== 'function') {
-    console.log('type Error')
-    return
+  if (typeof fn !== "function") {
+    console.log("type Error");
+    return;
   }
-  let newObject = Object.create(fn.prototype)
-  let result = fn.bind(newObject)(...args)
-  return result && (typeof result === 'object' || typeof result === 'function') ? result : newObject
+  let newObject = Object.create(fn.prototype);
+  let result = fn.bind(newObject)(...args);
+  // 判读函数返回的类型， 如果是普通类型则返回创建的对象，如果是引用类型则返回这个构造函数执行的结果
+  return result && (typeof result === "object" || typeof result === "function")
+    ? result
+    : newObject;
 }
