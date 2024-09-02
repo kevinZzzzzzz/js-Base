@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 60rem;
+      margin: 0 auto;
+      padding: 2rem;
+      background-color: #f4f4f4;
+    }
+
+    .header {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .content {
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+  </style>
+  <title>Responsive Layout with Dynamic rem</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">Responsive Layout</div>
+    <div class="content">
+      <p>This layout uses dynamic rem units for responsive design. Resize the browser to see the effect.</p>
+    </div>
+  </div>
+
+  <script>
+    function setRootFontSize() {
+      const baseSize = 16; // 基础字体大小
+      const designWidth = 1920; // 设计稿的宽度
+      const currentWidth = window.innerWidth; // 当前窗口的宽度
+      const newFontSize = (currentWidth / designWidth) * baseSize; // 根据窗口宽度计算新的字体大小
+
+      document.documentElement.style.fontSize = `${newFontSize}px`;
+    }
+
+    // 页面加载时设置字体大小
+    setRootFontSize();
+
+    // 监听窗口大小变化，动态设置字体大小
+    window.addEventListener('resize', setRootFontSize);
+  </script>
+</body>
+
+</html>
