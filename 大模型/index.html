@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="./brainJs/index.js"></script>
+
+  <script>
+    // const net = new brain.NeuralNetwork({
+    //   hiddenLayers: [3, 3]
+    // });
+    // net.train([
+    //   {
+    //     input: [0, 0], output: [0]
+    //   },
+    //   {
+    //     input: [0, 1], output: [1]
+    //   },
+    //   {
+    //     input: [1, 0], output: [1]
+    //   },
+    //   {
+    //     input: [1, 1], output: [0]
+    //   }
+    // ]);
+    // const output = net.run([1, 0]);  // 预计输出接近 1
+    // console.log(output)
+    // document.write(`Output for [1, 0]: ${Math.round(output)} | ${output}`);
+
+    const net = new brain.recurrent.LSTM();
+    const data = [
+      { "input": "implementing a caching mechanism improves performance", "output": "backend" },
+      { "input": "hover effects on buttons", "output": "frontend" },
+      { "input": "optimizing SQL queries", "output": "backend" },
+      { "input": "using flexbox for layout", "output": "frontend" },
+      { "input": "setting up a CI/CD pipeline", "output": "backend" },
+      { "input": "SVG animations for interactive graphics", "output": "frontend" },
+      { "input": "authentication using OAuth", "output": "backend" },
+      { "input": "responsive images for different screen sizes", "output": "frontend" },
+      { "input": "creating REST API endpoints", "output": "backend" },
+      { "input": "CSS grid for complex layouts", "output": "frontend" },
+      { "input": "database normalization for efficiency", "output": "backend" },
+      { "input": "custom form validation", "output": "frontend" },
+      { "input": "implementing web sockets for real-time communication", "output": "backend" },
+      { "input": "parallax scrolling effect", "output": "frontend" },
+      { "input": "securely storing user passwords", "output": "backend" },
+      { "input": "creating a theme switcher (dark/light mode)", "output": "frontend" },
+      { "input": "load balancing for high traffic", "output": "backend" },
+      { "input": "accessibility features for disabled users", "output": "frontend" },
+      { "input": "scalable architecture for growing user base", "output": "backend" }
+    ];
+
+    // 训练数据集
+    net.train(data, {
+      iteration: 2000,
+      errorThresh: 0.005,
+      log: true,
+      logPeriod: 100,
+    });
+
+    // 测试模型
+    const output = net.run('CSS grid for complex layouts');
+    document.write(`Predicted continuation: ${output}`);
+  </script>
+</body>
+
+</html>
