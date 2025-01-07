@@ -1,0 +1,14 @@
+{
+  "packageInformation": {
+    "cangjieTest": {
+      "rootPackageName": "cangjieTest",
+      "fileNameHash": "-2824792931081792266",
+      "timeStamp": 1736232520,
+      "buildFlag": true,
+      "exeName": "main",
+      "hasSubPkgs": false
+    }
+  },
+  "jsonHash": "4166554726349760448",
+  "rootPackageName": "cangjieTest"
+}

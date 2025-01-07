@@ -1,0 +1,16 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cangjieDebugBuild",
+			"cmd": "G:\\Cangjie-0.53.13-windows_x64\\cangjie\\bin\\cjc.exe",
+			"args": [
+				"-g",
+				"f:\\project\\js-Base\\仓颉\\testCangjie\\src\\main.cj",
+				"-o",
+				"f:\\project\\js-Base\\仓颉\\testCangjie\\src\\main.exe"
+			],
+			"label": "cangjieDebug build task - t22kHsvibD"
+		}
+	]
+}
