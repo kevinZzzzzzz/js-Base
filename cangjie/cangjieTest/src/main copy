@@ -1,0 +1,25 @@
+package cangjieTest
+
+
+func a() {
+    let b: Int64 = 2024
+    func c() {
+        println(b)
+    }
+    c()
+}
+
+class A {
+    let b = 2025
+    let a = 2024
+    public func c() {
+        println("a - b = ${a - b}")
+    }
+}
+
+
+
+main() {
+    a()
+    A().c()
+}

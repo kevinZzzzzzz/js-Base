@@ -3,7 +3,7 @@
     {
       "rootPackageName": "cangjieTest",
       "modulePath": ".",
-      "packagePath": "F:\\project\\js-Base\\cangjieTest\\src",
+      "packagePath": "F:\\project\\js-Base\\cangjie\\cangjieTest\\src",
       "fullName": "cangjieTest",
       "isMacroPackage": false,
       "output-type": "executable",
