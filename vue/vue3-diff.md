@@ -39,7 +39,7 @@ e1、e2 指的是什么？
   从头部开始正序比对，如果是相同的虚拟节点，则调用 patch 对比元素打补丁（先复用节点、再比较属性、再递归比较子节点），i++继续；
   终止条件：新旧虚拟节点不一致，或 双方有一方 i 大于 尾指针，停止循环(i > e1 && i > e2)
   ```
-    while (i <= e1 && i <= e2) {//从头开始比，相同就进行patch，有一方停止循环直接跳出
+    while (i <= e1 && i <= e2) {  //从头开始比，相同就进行patch，有一方停止循环直接跳出
       const n1 = oldChildren[i]//取出每一个进行比较是否相同
       const n2 = newChildren[i]
       if (isSameVnode(n1, n2)) {//比较类型和key，如果相同就递归比较他们的子级
@@ -181,9 +181,91 @@ e1、e2 指的是什么？
     }
   ```
 
+  ```
+    优化的办法是先遍历新的一组子节点，根据子节点的位置和 key 生成一张索引表，然后再遍历旧的一组子节点，利用节点的 key 在索引表中找到对应的新子节点的位置，以此填充 source 数组。
+    const oldStart = j
+    const newStart = j
+    const keyIndex = {}
+    for(let i = newStart; i <= newEnd; i++) {
+        keyIndex[newChildren[i].key] = i
+    }
+    for(let i = oldStart; i <= oldEnd; i++) {
+      oldVNode = oldChildren[i]
+      const k = keyIndex[oldVNode.key]
+      if (typeof k !== 'undefined') {
+        newVNode = newChildren[k]
+        patch(oldVNode, newVNode, container)
+        source[k - newStart] = i
+      } else {
+        unmount(oldVNode)
+      }
+    }
+    首先将预处理之后的j值作为遍历新旧节点开始时的索引，定义一个对象keyIndex作为索引表，遍历预处理之后剩余的一组新子节点，将新子节点newChildren[i]的key值与其位置索引放入索引表中。
+    遍历旧子节点，在遍历时，我们可以通过当前节点的key去keyIndex索引表中获取从而拿到当前遍历的旧子节点的oldChildren[i]对应的新节点的位置keyIndex[oldVNode.key],如果位置存在，说明节点可复用，使用patch打补丁，并且使用当前旧节点的索引i对source数组进行填充。
+  ```
+
   经过上述一番乱序对比之后，要倒序遍历新的乱序节点，对每个节点都进行操作，会有点儿浪费性能，能不能尽可能少的移动节点位置，有保证节点顺序正确呢？
   例如旧节点 1, 3, 4, 2，新节点 1, 2, 3, 4。那我们完全可以只将 2 移动到 3 前面，只需移动一次！就能保证顺序是正确的！！！
   我们可以针对于乱序比对中生成的数组 newIndexToOldIndexMap 获取最长递增子序列
+  最长递增子序列的意义：通过最长递增子序列得到的索引可以提示我们哪些元素的相对位置，在子节点更新后并未发生变化，我们可以保留这些节点的相对位置，然后去处理和移动其他位置。
+
+![](./最长递增子序列.png)
+
+```
+  根据最长递增子序列移动节点：
+  创建两个索引辅助移动:
+  索引 i 指向新的一组子节点中的最后一个节点。
+  索引 s 指向最长递增子序列中的最后一个元素。
+  我们需要去判断以下的情况:
+    source[i] === -1: 节点不存在，需要挂载新节点
+    i!==seq[s]：节点需要移动，
+    i===seq[s]：节点无需移动，将s递减并再次进行比较
+    完善patchKeyedChildren去处理这几种情况:
+    function patchKeyedChildren(n1, n2, container) {
+      //省略预处理和构造source数组代码
+      if (moved) {
+        const seq = lis(source)
+        // s 指向最长递增子序列的最后一个值
+        let s = seq.length - 1
+        let i = count - 1
+        for (i; i >= 0; i--) {
+          if (source[i] === -1) {
+            // 说明索引为 i 的节点是全新的节点，应该将其挂载
+            // 该节点在新的一组子节点中的真实位置索引
+                const pos = i + newStart
+                const newVNode = newChildren[pos]
+                // 该节点下一个节点的位置索引
+                const nextPos = pos + 1
+                // 锚点
+                const anchor = nextPos < newChildren.length
+                  ? newChildren[nextPos].el
+                  : null
+                patch(null, newVNode, container, anchor)
+          } else if (i !== seq[j]) {
+
+            // 说明该节点需要移动
+            // 该节点在新的一组子节点中的真实位置索引
+            const pos = i + newStart
+            const newVNode = newChildren[pos]
+            // 该节点下一个节点的位置索引
+            const nextPos = pos + 1
+            // 锚点
+            const anchor = nextPos < newChildren.length
+              ? newChildren[nextPos].el
+              : null
+            patch(null, newVNode, container, anchor)
+          } else {
+            // 当 i === seq[j] 时，说明该位置的节点不需要移动
+            // 并让 s 指向下一个位置
+            s--
+          }
+        }
+      }
+    }
+    }
+
+
+```
 
 ```
 官方：
