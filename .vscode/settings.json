@@ -15,5 +15,10 @@
     "comments": "off",
     "strings": "on"
   },
-  "liveServer.settings.port": 5501
+  "liveServer.settings.port": 5501,
+  "marscode.chatLanguage": "cn",
+  "marscode.codeCompletionPro": {
+    "enableCodeCompletionPro": true
+  },
+  "marscode.enableInlineCommand": true
 }
