@@ -153,8 +153,56 @@ run：将当前副作用函数设置为活动状态，执行副作用函数，�
 stop：停止追踪依赖，从所有依赖项的依赖列表中移除当前副作用函数，并清空 deps 数组。
 track 函数：
 
+```
+function track(target, key) {
+  if (activeEffect) {
+    // 获取目标对象的依赖映射
+    let depsMap = targetMap.get(target);
+    if (!depsMap) {
+      // 如果不存在，则创建一个新的依赖映射
+      targetMap.set(target, (depsMap = new Map()));
+    }
+    // 获取目标对象指定键的依赖集合
+    let dep = depsMap.get(key);
+    if (!dep) {
+      // 如果不存在，则创建一个新的依赖集合
+      depsMap.set(key, (dep = new Set()));
+    }
+    // 将当前活动的副作用函数添加到依赖集合中
+    dep.add(activeEffect);
+    // 将依赖集合添加到副作用函数的依赖列表中
+    activeEffect.deps.push(dep);
+  }
+}
+
+```
+
 用于追踪依赖，当有活动的副作用函数时，将其添加到目标对象指定键的依赖集合中，并将依赖集合添加到副作用函数的依赖列表中。
 trigger 函数：
+
+```
+function trigger(target, key) {
+  // 获取目标对象的依赖映射
+  const depsMap = targetMap.get(target);
+  if (depsMap) {
+    // 获取目标对象指定键的依赖集合
+    const dep = depsMap.get(key);
+    if (dep) {
+      // 遍历依赖集合
+      dep.forEach(effect => {
+        if (effect.scheduler) {
+          // 如果有调度器函数，则调用调度器函数
+          effect.scheduler();
+        } else {
+          // 否则直接运行副作用函数
+          effect.run();
+        }
+      });
+    }
+  }
+}
+
+```
 
 用于触发依赖更新，当目标对象的指定键发生变化时，遍历其依赖集合，根据是否有调度器函数来决定是调用调度器函数还是直接运行副作用函数。
 targetMap：

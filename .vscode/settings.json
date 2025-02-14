@@ -18,7 +18,7 @@
   "liveServer.settings.port": 5501,
   "marscode.chatLanguage": "cn",
   "marscode.codeCompletionPro": {
-    "enableCodeCompletionPro": true
+    "enableCodeCompletionPro": false
   },
   "marscode.enableInlineCommand": true
 }
