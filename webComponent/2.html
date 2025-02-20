@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <hello-button></hello-button>
+
+  <script>
+    class HelloButton extends HTMLElement {
+      constructor() {
+        super()
+        // 封装私有空间
+        const shadow = this.attachShadow({ mode: 'open' })
+        const button = document.createElement('button')
+        button.textContent = '点击我打招呼'
+        button.style.cursor = 'pointer'
+        button.style.padding = '5px'
+        button.style.background = '#4CAF50'
+        button.style.color = '#fff'
+        button.style.border = '1px solid #4CAF50'
+        shadow.appendChild(button)
+      }
+      connectedCallback() {
+        console.log(1)
+        this.shadowRoot.querySelector('button').onclick = () => {
+          alert('hello world')
+        }
+      }
+    }
+    customElements.define('hello-button', HelloButton)
+  </script>
+</body>
+
+</html>

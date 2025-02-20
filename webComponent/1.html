@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    /* 外部样式 */
+    .container {
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 宿主元素 -->
+  <div id="host-element" class="container">
+    <div id="host-element2" class="container"></div>
+    <!-- 宿主元素内的内容 -->
+    <p>这是宿主元素内的文本。</p>
+    <button>点击我</button>
+  </div>
+
+  <script>
+    // 获取宿主元素
+    const hostElement = document.getElementById('host-element2');
+
+    // 创建影子根节点
+    const shadowRoot = hostElement.attachShadow({ mode: 'open' });
+
+    // 创建影子 DOM 的样式
+    const styles = `
+      /* 影子 DOM 样式 */
+      .container {
+        background-color: #f5f5f5;
+        border: 1px solid red !important;
+        padding: 20px;
+      }
+      p {
+        color: blue;
+      }
+    `;
+
+    // 创建样式元素并将样式添加到影子根节点中
+    const stylesElement = document.createElement('style');
+    stylesElement.textContent = styles;
+    shadowRoot.appendChild(stylesElement);
+
+    // 创建影子 DOM 中的内容
+    const shadowContent = document.createElement('p');
+    shadowContent.textContent = '这是影子 DOM 内的文本。';
+    shadowRoot.appendChild(shadowContent);
+
+    // 在影子 DOM 中注册事件
+    shadowContent.addEventListener('click', () => {
+      console.log('点击了影子 DOM 内的内容');
+    });
+
+    // 将影子元素添加到影子根节点中
+    // shadowRoot.appendChild(shadowContent);
+  </script>
+</body>
+
+</html>
