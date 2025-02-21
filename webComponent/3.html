@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <template id="hello-template">
+    <style>
+      button {
+        background-color: #2196f3;
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 4px;
+        border: none;
+        font-size: 16px;
+      }
+    </style>
+    <button>
+      <slot>默认文字</slot>
+    </button>
+  </template>
+
+  <!-- 使用组件 -->
+  <hello-button>点击我</hello-button>
+
+  <script>
+    class HelloButton extends HTMLElement {
+      constructor() {
+        super()
+        const shadow = this.attachShadow({ mode: 'open' })
+        const template = document.getElementById('hello-template')
+        const content = template.content.cloneNode(true) // 深拷贝模板
+        console.log(content, 'content0000000')
+        shadow.appendChild(content)
+      }
+    }
+    customElements.define('hello-button', HelloButton)
+  </script>
+</body>
+
+</html>

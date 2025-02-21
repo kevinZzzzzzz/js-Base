@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>用 Web Components 复刻 Element Plus 按钮</title>
+</head>
+
+<body>
+  <template id="el-button-template">
+    <style>
+      :host {
+        display: inline-block;
+        --el-button-primary: #409eff;
+        --el-button-success: #67c23a;
+        --el-button-warning: #e6a23c;
+        --el-button-danger: #f56c6c;
+        --el-button-info: #909399;
+      }
+
+      .el-button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        color: #fff;
+        transform: opacity 10.3s;
+      }
+
+      .el-button:hover {
+        opacity: 0.4;
+      }
+
+      /* 类型样式映射 */
+      .primary {
+        background: var(--el-button-primary);
+      }
+
+      .success {
+        background: var(--el-button-success);
+      }
+
+      .warning {
+        background: var(--el-button-warning);
+      }
+
+      .danger {
+        background: var(--el-button-danger);
+      }
+
+      .info {
+        background: var(--el-button-info);
+      }
+    </style>
+
+    <button class="el-button">
+      <slot>按钮</slot>
+    </button>
+  </template>
+
+
+  <script>
+    class ElButton extends HTMLElement {
+      static observedAttributes = ['type']
+
+      constructor() {
+        super()
+        const shadow = this.attachShadow({ mode: 'open' })
+        const template = document.getElementById('el-button-template')
+        shadow.appendChild(template.content.cloneNode(true))
+
+        this.button = shadow.querySelector('.el-button')
+      }
+
+      // 监听属性变化
+      attributeChangedCallback(name, oldVal, newVal) {
+        console.log(name, oldVal, newVal)
+        if (name === 'type') {
+          this.updateButtonType(newVal)
+        }
+      }
+
+      // 更新按钮类型
+      updateButtonType(type) {
+        const validTypes = ['primary', 'success', 'warning', 'danger', 'info']
+        const finalType = validTypes.includes(type) ? type : 'primary'
+
+        // 移除旧类型类名
+        console.log(this.button.classList)
+        this.button.classList.remove(...validTypes)
+
+        // 添加新类型类名
+        this.button.classList.add(finalType)
+      }
+
+      // 组件挂载时初始化
+      connectedCallback() {
+        const type = this.getAttribute('type') || 'primary'
+        this.updateButtonType(type)
+
+        // 绑定点击事件
+        this.button.addEventListener('click', () => {
+          console.log('按钮被点击2')
+          this.dispatchEvent(new CustomEvent('click'))
+        })
+      }
+    }
+    // 注册自定义元素
+    customElements.define('el-button', ElButton);
+  </script>
+
+  <el-button>默认按钮</el-button>
+
+  <!-- 指定类型 -->
+  <el-button type="success">成功按钮</el-button>
+  <el-button type="danger">危险按钮</el-button>
+
+  <!-- 事件监听 -->
+  <el-button type="warning" id="demo">测试按钮</el-button>
+
+  <script>
+    document.getElementById("demo").addEventListener("click", () => {
+      console.log('按钮被点击1')
+      // alert("按钮被点击！");
+    });
+  </script>
+</body>
+
+</html>
