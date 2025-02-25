@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Push State Example</title>
+  <script>
+    // 监听页面的 load 事件，然后通过 pushState() 修改 URL
+    window.addEventListener('load', function () {
+      history.pushState({
+        page: 'home'
+      }, 'Home', '/');
+    });
+
+    // 监听“点击链接”事件，然后使用 pushState() 修改 URL，并通过 AJAX 获取并渲染新内容
+    document.addEventListener('click', function (event) {
+      console.log("监听“点击链接”事件", event);
+      // 点击的是内部链接
+      if (event.target.tagName === 'A') {
+        event.preventDefault();  // 阻止默认跳转事件
+        var url = event.target.getAttribute('href');
+        var title = event.target.textContent;
+
+        // 使用 pushState() 修改 URL
+        history.pushState({
+          page: url.split('/').pop()  // 使用 URL 最后一部分作为状态数据
+        }, title, url);
+
+        // 异步获取并渲染新内容
+        // var xhr = new XMLHttpRequest();
+        // xhr.open('GET', url);
+        // xhr.onload = function() {
+        document.getElementById('content').innerHTML = title;
+        // };
+        // xhr.send();
+      }
+    });
+
+    // 监听 popstate 事件，然后使用 AJAX 获取并渲染历史记录对应的内容
+    window.addEventListener('popstate', function (event) {
+      console.log("popstate 事件", event);
+      // 如果历史记录中有状态数据，并且其中包含页面的标识符
+      if (event.state && event.state.page) {
+        var url = '/' + event.state.page;  // 根据状态数据拼接出 URL
+        // var xhr = new XMLHttpRequest();
+        // xhr.open('GET', url);
+        // xhr.onload = function() {
+        document.getElementById('content').innerHTML = url;
+      };
+      // xhr.send();
+    });
+  </script>
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <li><a href="/home">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div id="content">
+    <h1>Home Page</h1>
+  </div>
+</body>
+
+</html>
