@@ -1,15 +1,15 @@
-<h2 id="So1Sp">本地安装（window）</h2>
-<h4 id="yGIpe">Microsoft C++ 生成工具</h4>
+## 本地安装（window）
+#### Microsoft C++ 生成工具
 1. <font style="color:rgb(53, 56, 65);">下载 </font>[Microsoft C++ 生成工具](https://visualstudio.microsoft.com/zh-hans/visual-cpp-build-tools/)<font style="color:rgb(53, 56, 65);"> 安装程序并打开它以开始安装。</font>
 2. <font style="color:rgb(53, 56, 65);">在安装过程中，选中“使用 C++ 的桌面开发”选项。</font>
 
 ![](https://cdn.nlark.com/yuque/0/2025/png/613636/1743500956324-4d929534-24e0-4cf3-ad21-ac86ff4f2bce.png)
 
-<h4 id="gn6Ue">WebView2</h4>
+#### WebView2
 > <font style="color:rgb(23, 24, 28);">WebView 2 已安装在 Windows 10（从版本 1803 开始）和更高版本的 Windows 上。如果你正在这些版本之一上进行开发，则可以跳过此步骤。</font>
 >
 
-<h4 id="UkEJV">下载并安装 Rust</h4>
+#### 下载并安装 Rust
 <font style="color:rgb(53, 56, 65);">前往 </font>[https://www.rust-lang.org/zh-CN/tools/install](https://www.rust-lang.org/zh-CN/tools/install)<font style="color:rgb(53, 56, 65);"> 下载 </font>`<font style="color:rgb(53, 56, 65);">rustup</font>`<font style="color:rgb(53, 56, 65);">。</font>
 
 > <font style="color:rgb(53, 56, 65);">安装前先设置</font>[rust的国内镜像源](https://blog.csdn.net/CherishTaoTao/article/details/142611442?ops_request_misc=%257B%2522request%255Fid%2522%253A%252278333402df6ad86cfd11540be40804ce%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=78333402df6ad86cfd11540be40804ce&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-2-142611442-null-null.142^v102^pc_search_result_base7&utm_term=Rust%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE&spm=1018.2226.3001.4187)，加快安装！！！
@@ -19,7 +19,7 @@
 
 ![](https://cdn.nlark.com/yuque/0/2025/png/613636/1743501400284-6dcf64ca-e970-4d40-a9be-8919a6515321.png)
 
-<h2 id="e2vJj">创建项目</h2>
+## 创建项目
 安装完成后 即可创建项目
 
 ```typescript
@@ -35,8 +35,8 @@ pnpm tauri dev
 
 ![](https://cdn.nlark.com/yuque/0/2025/png/613636/1743502543225-94c759e4-7909-4328-b104-c70557c4f8a1.png)
 
-<h2 id="ioLCD">demo</h2>
-<h4 id="yJPkZ">调用系统弹窗</h4>
+## demo
+#### 调用系统弹窗
 ```vue
 <template>
   <main class="container">
@@ -67,8 +67,8 @@ const handleMsg = async () => {
 
  ![](https://cdn.nlark.com/yuque/0/2025/gif/613636/1743503210730-b7c84911-9c46-43ca-a0a8-87b6ff5f2380.gif)
 
-<h4 id="LTijf">联调rust</h4>
-<h5 id="mAZm6">调用greet方法，将文案展示到屏幕上</h5>
+#### 联调rust
+##### 调用greet方法，将文案展示到屏幕上
 ```rust
 #[tauri::command]
 fn greet(name: &str) -> String {
@@ -121,8 +121,10 @@ async function greet() {
 
 ![](https://cdn.nlark.com/yuque/0/2025/gif/613636/1743503527247-6a8596a5-3e16-49d7-811b-bb8f3ee22237.gif)
 
-<h5 id="cEqHQ">获取本地打印机列表</h5>
-先安装依赖模块([printers](https://docs.rs/printers/2.1.2/printers/))
+##### 获取本地打印机列表
+先安装依赖模块([printers](https://docs.rs/printers/2.1.2/printers/))，
+
+[rust依赖库](https://docs.rs/)
 
 ```rust
 [package]
@@ -236,9 +238,42 @@ pub fn get_printer_list() -> Vec<PrinterInfo> {
 
 ![](https://cdn.nlark.com/yuque/0/2025/gif/613636/1743503811844-f52e53c4-6dc0-49f3-96d4-23ad7d9050ee.gif)
 
+## 打包
+##### 打包配置（exe和msi）
+```vue
+{
+  ...
+    "bundle": {
+      "targets": "msi",
+      "windows": {
+        "wix": {
+          "language": "zh-CN",
+          "template": null,
+          "bannerPath": null,
+          "dialogImagePath": null
+        }
+      },
+      "active": true,
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ]
+    }
+}
+```
 
+**！！！打包之间会可能会遇到下载 **[**WiX等其它打包文件失败**](about:blank)**，需要下载对应的资源放本地。**
 
+![](https://cdn.nlark.com/yuque/0/2025/png/613636/1743560301972-dbcefb0b-6b54-4e74-be56-056775e7af36.png)
 
+```powershell
+// 解决完后，然后执行
+pnpm tauri build
+```
 
-
+##### 安装后的产物
+![](https://cdn.nlark.com/yuque/0/2025/png/613636/1743561110347-6aade6fd-526e-45d5-a784-83e97e16487a.png)
 
