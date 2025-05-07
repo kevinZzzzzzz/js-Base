@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./a.css" />
+  <script>
+    console.log('【readystatechange】', document.readyState)
+    document.addEventListener('readystatechange', (e) => {
+      console.log('【readystatechange】', document.readyState)
+    })
+    window.addEventListener('load', (e) => {
+      console.log('【load】')
+    })
+
+    document.addEventListener('DOMContentLoaded', (e) => {
+      console.log('【DOMContentLoaded】')
+    })        
+  </script>
+  <script defer src="./a.js"></script>
+  <script async src="./b.js"></script>
+  <script src="./c.js"></script>
+</head>
+
+<body>
+  <div class="container"></div>
+  <h1>1</h1>
+</body>
+
+</html>
