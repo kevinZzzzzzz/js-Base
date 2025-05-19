@@ -4,6 +4,7 @@ Fiber 用于协调组件的渲染和生命周期，可以理解为是一个执�
 
 ## 引入 fiber 之前
 
+React 使用的是栈式架构（Stack Reconcilation），它基于递归的方式来进行 Virtual DOM 的比较和更新。
 虚拟 dom 就是一个对象，这个对象包含 dom 节点类型的 type，以及 dom 属性的 props 对象。
 虚拟 dom 渲染到页面一共分为几个阶段:
 
