@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>useState hook</title>
+  <style>
+    #app-container {
+      border: 2px solid #000;
+      padding: 20px;
+      margin: 20px;
+      font-size: 18px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script>
+    // Mini React 基本实现
+    function createElement(type, props, ...children) { 
+      return { 
+        type, 
+        props: props || {}, 
+        children: children.map(child => typeof child === 'object' ? child : createTextElement(child) ), 
+      }; 
+    } 
+    
+    function createTextElement(text) { 
+      return { 
+        type: 'TEXT_ELEMENT', 
+        props: { nodeValue: text }, 
+        children: [], 
+      }; 
+    }
+    
+    function render(vdom, container) {
+      if (typeof vdom.type === 'function') {
+        const component = vdom.type;
+        const props = vdom.props;
+        const childVdom = component(props);
+        render(childVdom, container);
+        return;
+      }
+
+      const dom = vdom.type === 'TEXT_ELEMENT'
+        ? document.createTextNode(vdom.props.nodeValue || '')
+        : document.createElement(vdom.type);
+
+      Object.keys(vdom.props).forEach(name => {
+        if (name.startsWith('on')) {
+          const eventType = name.slice(2).toLowerCase();
+          dom.addEventListener(eventType, vdom.props[name]);
+        } else if (name === 'style') {
+          Object.assign(dom.style, vdom.props[name]);
+        } else {
+          dom[name] = vdom.props[name];
+        }
+      });
+
+      vdom.children.forEach(child => render(child, dom));
+      container.appendChild(dom);
+    }
+
+    // useState 实现
+    let hooks = [];
+    let currentHook = 0;
+
+    function useState(initial) {
+      const hookIndex = currentHook;
+      hooks[hookIndex] = hooks[hookIndex] || initial;
+
+      const setState = newState => {
+        hooks[hookIndex] = newState;
+        renderApp();  // 更新UI
+      };
+
+      const state = hooks[hookIndex];
+      currentHook++;
+      
+      return [state, setState];
+    }
+
+    // 定义 renderApp 函数，用于重新渲染应用
+    function renderApp() {
+      currentHook = 0; // 重置 currentHook，确保状态按顺序应用
+      document.getElementById('root').innerHTML = ''; // 清空容器内容
+      render(createElement(MyStatefulComponent), document.getElementById('root')); // 重新渲染组件
+    }
+
+    // 定义测试组件 MyStatefulComponent
+    function MyStatefulComponent() {
+      const [count, setCount] = useState(0);
+
+      return createElement(
+        'div',
+        { id: 'app-container' },
+        `Count: ${count}`,
+        createElement(
+          'button',
+          { onClick: () => setCount(count + 1) },
+          'Increment'
+        )
+      );
+    }
+
+    // 初始渲染
+    renderApp();
+
+  </script>
+</body>
+</html>
